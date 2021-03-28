@@ -23,7 +23,7 @@ try {
   // 截取登录参数
   $lt = substr($login, strpos($login, 'name="lt"') + 17, 58);
 
-  // 获取验证码并使用 TesseractOCR 处理
+  // 获取验证码并使用 Tesseract OCR 处理
   $captcha = $guzzle->request("GET", base64_decode("aHR0cHM6Ly9jYXMuZ3podS5lZHUuY24vY2FzX3NlcnZlci9jYXB0Y2hhLmpzcA"));
   file_put_contents("captcha.jpg", $captcha->getBody());
   $captcha = (new TesseractOCR("captcha.jpg"))->digits()->run();
@@ -332,9 +332,9 @@ try {
   if (mb_strpos($doAction->getBody()->getContents(), '"error":"打卡成功"') === false) {
     throw new Exception("Checkin Failed");
   }
-  echo "SUCCESS: " . base64_decode("aHR0cDovL3lxdGIuZ3podS5lZHUuY24vaW5mb3BsdXMvZm9ybS8") . $formID . base64_decode("L3JlbmRlcg");
+  echo "SUCCESS: " . base64_decode("aHR0cDovL3lxdGIuZ3podS5lZHUuY24vaW5mb3BsdXMvZm9ybS8") . $formID . base64_decode("L3JlbmRlcg") . "\n";
 
 } catch (Exception $err) {
-  echo "ERROR: " . $err->getMessage();
+  echo "ERROR: " . $err->getMessage() . "\n";
 }
 ?>
