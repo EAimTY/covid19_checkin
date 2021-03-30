@@ -25,8 +25,8 @@ try {
 
   // 获取验证码并使用 Tesseract OCR 处理
   $captcha = $guzzle->request("GET", base64_decode("aHR0cHM6Ly9jYXMuZ3podS5lZHUuY24vY2FzX3NlcnZlci9jYXB0Y2hhLmpzcA"));
-  file_put_contents("captcha.jpg", $captcha->getBody());
-  $captcha = (new TesseractOCR("captcha.jpg"))->digits()->run();
+  file_put_contents(dirname(__FILE__) . "captcha.jpg", $captcha->getBody());
+  $captcha = (new TesseractOCR(dirname(__FILE__) . "captcha.jpg"))->digits()->run();
   if (strlen($captcha) != 4) {
     throw new Exception("Failed processing captcha");
   }
