@@ -10,6 +10,18 @@ $password = "mypassword";
 
 try {
 
+  // 检查 PHP 版本
+  if (version_compare(PHP_VERSION, '7.2.5') <= 0) {
+    throw new Exception("PHP version not meeting requirement, use at least 7.2.5");
+  }
+
+  // 检查 mbstring 扩展
+  if (!extension_loaded('mbstring')) {
+    if (!dl('mbstring.so')) {
+      throw new Exception("No php-mbstring extension found");
+    }
+  }
+
   // 建立 Guzzle Client
   $guzzle = new Client([
     "base_uri" => base64_decode("aHR0cDovL3lxdGIuZ3podS5lZHUuY24v"),

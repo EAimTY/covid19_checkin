@@ -8,7 +8,7 @@
 
 # 运行需求
 
-- PHP 7.2+: 脚本运行环境
+- PHP 7.2.5+: 脚本运行环境
 - PHP mbstring 扩展: 中文字符支持
 - Tesseract OCR: 自动识别登录验证码
 - PHP 可以读写脚本目录下的 `captcha.jpg`
