@@ -21,12 +21,13 @@ try {
   $login = $guzzle->request("GET", base64_decode("aHR0cHM6Ly9jYXMuZ3podS5lZHUuY24vY2FzX3NlcnZlci9sb2dpbg"))->getBody()->getContents();
 
   // 截取登录参数
-  $lt = substr($login, strpos($login, 'name="lt"') + 17, 58);
+  $lt = mb_substr($login, mb_strpos($login, 'name="lt"') + 17);
+  $lt = mb_substr($lt, 0, mb_strpos($lt, ".example.org") + 12);
 
   // 获取验证码并使用 Tesseract OCR 处理
   $captcha = $guzzle->request("GET", base64_decode("aHR0cHM6Ly9jYXMuZ3podS5lZHUuY24vY2FzX3NlcnZlci9jYXB0Y2hhLmpzcA"));
-  file_put_contents(dirname(__FILE__) . "captcha.jpg", $captcha->getBody());
-  $captcha = (new TesseractOCR(dirname(__FILE__) . "captcha.jpg"))->digits()->run();
+  file_put_contents(dirname(__FILE__) . "/captcha.jpg", $captcha->getBody());
+  $captcha = (new TesseractOCR(dirname(__FILE__) . "/captcha.jpg"))->digits()->run();
   if (strlen($captcha) != 4) {
     throw new Exception("Failed processing captcha");
   }
@@ -53,7 +54,7 @@ try {
   $start = $guzzle->request("GET", base64_decode("aHR0cDovL3lxdGIuZ3podS5lZHUuY24vaW5mb3BsdXMvZm9ybS9YTllRU0Ivc3RhcnQ"))->getBody()->getContents();
 
   // 截取 csrfToken
-  $csrfToken = substr($start, strpos($start, 'itemscope="csrfToken"') + 31, 32);
+  $csrfToken = mb_substr($start, mb_strpos($start, 'itemscope="csrfToken"') + 31, 32);
 
   // 获取疫情打卡表单 ID
   $startData = [
@@ -86,8 +87,8 @@ try {
   $render = $guzzle->post(base64_decode("aHR0cDovL3lxdGIuZ3podS5lZHUuY24vaW5mb3BsdXMvaW50ZXJmYWNlL3JlbmRlcg"), $renderData)->getBody()->getContents();
 
   // 解析 autofill 数据为 json
-  $data_json = substr($render, strpos($render, '"data":') + 7);
-  $data_json = json_decode(substr($data_json, 0, strpos($data_json, ',"snapshots":')), true);
+  $data_json = mb_substr($render, mb_strpos($render, '"data":') + 7);
+  $data_json = json_decode(mb_substr($data_json, 0, mb_strpos($data_json, ',"snapshots":')), true);
 
   // 建立疫情打卡所需的 formData
   $checkinData = [
@@ -332,6 +333,7 @@ try {
   if (mb_strpos($doAction->getBody()->getContents(), '"error":"打卡成功"') === false) {
     throw new Exception("Checkin Failed");
   }
+
   echo "SUCCESS: " . base64_decode("aHR0cDovL3lxdGIuZ3podS5lZHUuY24vaW5mb3BsdXMvZm9ybS8") . $formID . base64_decode("L3JlbmRlcg") . "\n";
 
 } catch (Exception $err) {
