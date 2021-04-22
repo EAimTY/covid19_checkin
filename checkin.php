@@ -12,13 +12,13 @@ try {
 
   // 检查 PHP 版本
   if (version_compare(PHP_VERSION, '7.2.5') <= 0) {
-    throw new Exception("PHP version not meeting requirement, use at least 7.2.5");
+    throw new Exception("PHP version does not meet the requirements. Please use at least version 7.2.5");
   }
 
   // 检查 mbstring 扩展
   if (!extension_loaded('mbstring')) {
     if (!dl('mbstring.so')) {
-      throw new Exception("No php-mbstring extension found");
+      throw new Exception("PHP mbstring extension not found");
     }
   }
 

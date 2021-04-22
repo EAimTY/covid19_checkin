@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '428d42b6d794c8899b007a0e5e312bc731439ce4',
+    'reference' => '5b6071a85189ad0b4415f3788c2f5fc0a0b58818',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '428d42b6d794c8899b007a0e5e312bc731439ce4',
+      'reference' => '5b6071a85189ad0b4415f3788c2f5fc0a0b58818',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -114,12 +114,12 @@ private static $installed = array (
     ),
     'thiagoalessio/tesseract_ocr' => 
     array (
-      'pretty_version' => '2.11.0',
-      'version' => '2.11.0.0',
+      'pretty_version' => '2.11.2',
+      'version' => '2.11.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd288750532593ba3eaf2e7446f426fc561caf2a2',
+      'reference' => '502c62abc1235189921fcdfae83f78926eb15246',
     ),
   ),
 );

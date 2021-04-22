@@ -40,13 +40,44 @@
 
 ## 如何实现每天自动打卡？
 
-Linux 下可以使用 crontab 实现自动化，Windows 下可以使用计划任务
+遵循最小化原则，脚本仅提供打卡功能，不提供自动化
+
+类 Unix 系统可以使用 crontab，Windows 系统可以使用计划任务实现每日自动打卡
+
+## 实现打卡未成功自动重试
+
+类 Unix 系统用户可以使用下面的 Shell 脚本
+
+    #!/bin/sh
+    OUTPUT=0
+    LOOP=0
+    while true; do
+
+      # 将 /PATH/TO/checkin.php 修改为打卡脚本文件位置
+      OUTPUT=$(php /PATH/TO/checkin.php)
+
+      echo $OUTPUT
+      LOOP=$((LOOP+1))
+
+      # 将 $LOOP -ge 8 中的 8 改为打卡失败自动重试次数
+      if [ $LOOP -ge 8 ] || [ $(echo $OUTPUT | grep "SUCCESS") ]; then
+        break
+      fi
+
+      # 将 2m 改为打卡失败后等待重试的时间，单位 s 为秒，m 为分钟，h 为小时
+      sleep 2m
+
+    done
+
+手动运行或使用 crontab 运行此脚本，若打卡失败则将在等待指定时间后自动重试，直至达到指定重试次数
+
+Windows 用户请自便
 
 ## 报 Tesseract OCR 错误
 
 确保 PHP 可以读写脚本目录下的`captcha.jpg`，且已经正确安装了 Tesseract OCR 主程序与任意语言包（如`tesseract-data-eng`）
 
-Linux 用户请确保在 shell 中可以通过`tesseract`正常运行 Tesseract OCR，Windows 用户请将 Tesseract OCR 程序加入 PATH 变量
+类 Unix 系统用户请确保在 shell 中可以通过`tesseract`正常运行 Tesseract OCR，Windows 用户请将 Tesseract OCR 程序加入 PATH 变量
 
 ## 为什么是 PHP？
 
