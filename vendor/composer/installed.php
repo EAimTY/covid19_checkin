@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '5a4b0a9204a4e5dc792375fdafbffcbf7e4e56b1',
+        'reference' => '75450c2e3e6fbac6329d5857f5832eb1db88299d',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '5a4b0a9204a4e5dc792375fdafbffcbf7e4e56b1',
+            'reference' => '75450c2e3e6fbac6329d5857f5832eb1db88299d',
             'dev_requirement' => false,
         ),
         'guzzlehttp/guzzle' => array(
@@ -38,12 +38,12 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '1.8.2',
-            'version' => '1.8.2.0',
+            'pretty_version' => '2.0.0',
+            'version' => '2.0.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
-            'reference' => 'dc960a912984efb74d0a90222870c72c87f10c91',
+            'reference' => '1dc8d9cba3897165e16d12bb13d813afb1eb3fe7',
             'dev_requirement' => false,
         ),
         'psr/http-client' => array(
@@ -56,6 +56,21 @@
             'dev_requirement' => false,
         ),
         'psr/http-client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
+        'psr/http-factory' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/http-factory',
+            'aliases' => array(),
+            'reference' => '12ac7fcd07e5b077433f5f2bee95b3a771bf61be',
+            'dev_requirement' => false,
+        ),
+        'psr/http-factory-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0',

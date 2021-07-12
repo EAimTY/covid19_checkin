@@ -57,8 +57,8 @@ try {
       "submit"    => "登录"
     ]
   ];
-  $login = $guzzle->post(base64_decode("aHR0cHM6Ly9jYXMuZ3podS5lZHUuY24vY2FzX3NlcnZlci9sb2dpbg"), $loginData);
-  if (mb_strpos($login->getBody()->getContents(), base64_decode("PHRpdGxlPuS4u+mhtSAtIOW5v+W3nuWkp+Wtpi0t6Zeo5oi3PC90aXRsZT4")) === false) {
+  $login = $guzzle->post(base64_decode("aHR0cHM6Ly9jYXMuZ3podS5lZHUuY24vY2FzX3NlcnZlci9sb2dpbg"), $loginData)->getBody()->getContents();
+  if ((mb_strpos($login, base64_decode("PHRpdGxlPuS4u+mhtSAtIOW5v+W3nuWkp+Wtpi0t6Zeo5oi3PC90aXRsZT4")) === false) && (mb_strpos($login, base64_decode("5b2T5YmN6YCJ6K++5pyf6Ze0")) === false)) {
     throw new Exception("Login Failed");
   }
 
